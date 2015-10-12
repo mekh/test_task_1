@@ -1,8 +1,8 @@
 #!/usr/bin/python
-# Initial conditions: objects-figures of the next types are given: square, triangle, circle, trapezoid.
+# Initial conditions: objects-figures of the next type are given: square, triangle, circle, trapezoid.
 # Each figure can be drawn, the figure area or figure color can be obtained.
 # Also, each of the figures has it's own unique methods. For example: get radius, length of hypotinuse,
-# side's length, etc.
+# length of side, etc.
 # 
 # The task: generate random set of random number of figures.
 # After array is generated, print the list of generated figures, for ex.:
@@ -15,11 +15,14 @@ from math import pi as pi
 import sys
 
 class Figures():
-  def __init__(self):
-    self.color = random.choice(('red', 'orange', 'yellow', 'green', 'blue', 'indigo', 'violet'))
-    self.area = None
-    self.name = None
-    
+  def __init__(self, name = None, color = None, area = None):
+    if not color:
+      self.color = random.choice(('red', 'orange', 'yellow', 'green', 'blue', 'indigo', 'violet'))
+    else:
+      self.color = color
+    self.name = name
+    self.area = area
+        
   def get_color(self):
     return self.color
 
@@ -34,9 +37,8 @@ class Figures():
 
 
 class Triangle(Figures):
-  def __init__(self):
-    Figures.__init__(self)
-    self.name = 'triangle'
+  def __init__(self, name = 'triangle', color = None):
+    Figures.__init__(self, name, color)
     self.a, self.b = (random.uniform(1, 100) for x in range(2))
     self.c = (self.a**2 + self.b**2)**.5
     self.area = self.a * self.b/2.0
@@ -49,9 +51,8 @@ class Triangle(Figures):
 
 
 class Trapezoid(Figures):
-  def __init__(self):
-    Figures.__init__(self)
-    self.name = 'trapezoid'
+  def __init__(self, name = 'trapezoid', color = None):
+    Figures.__init__(self, name, color)
     self.a, self.h, self.b1, self.b2 = (random.uniform(1, 100) for x in range(4))
     self.b = self.b1 + self.b2 + self.a     #   ____a____
     self.c = (self.b1**2 + self.h**2)**.5   # c/|      h|\d
@@ -66,9 +67,8 @@ class Trapezoid(Figures):
 
 
 class Square(Figures):
-  def __init__(self):
-    Figures.__init__(self)
-    self.name = 'square'
+  def __init__(self, name = 'square', color = None):
+    Figures.__init__(self, name, color)
     self.a = random.uniform(1, 100)
     self.area = self.a**2
 
@@ -80,9 +80,8 @@ class Square(Figures):
 
 
 class Circle(Figures):
-  def __init__(self):
-    Figures.__init__(self)
-    self.name = 'circle'
+  def __init__(self, name = 'circle', color = None):
+    Figures.__init__(self, name, color)
     self.r = random.uniform(1, 100)
     self.area = pi * self.r**2
 
